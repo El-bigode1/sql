@@ -1,0 +1,74 @@
+Por enquanto tamo aprendendo no mysql, por meio da alura
+Vai no plano de ataque mcFadyen, e copia o que eu falei de sql por la:
+Senha do mysql == mysql
+
+Aula 1:comandos do terminal
+
+	* mysql -u root -p
+	* create database {nome} ;
+	* use {nome da database} ;
+	* create table compras (id int auto_increment primary key, valor double, data date, recebido boolean, observacoes varchar(255) ) ;
+	* desc {nome} -- descreva, mostra a tabela
+	* insert into compras (valor, data, recebido, observacoes) values (1500.0, '2014-05-14', 1, 'geladeira nova');
+	* select * from compras ;
+	* select data, valor from compras ;
+	* select data, valor * 3 from compras ;
+	* select data, valor from compras where valor > 1000 ;
+	* select * from compras where recebido = 1;
+	* select * from compras where recebido = true;
+	* select * from compras where valor <> 500;
+	* select * from compras where observacoes = 'celular velho'; --> (Busca exata)
+	* select * from compras where observacoes like 'celular velho%'; --> (Acha pelos resquicios)
+	* select * from compras where observacoes like '%xpto%'; --> (Acha pelos resquicios)
+
+id é o nome, int, que se autoincrementa, e funciona como chave primaria da linhavarchar (numero) == String,
+	exige um construtor com o numero de caracteres maximos a serem utilizados
+
+insert into coloca um dado novoprimeiro vc coloca a ordem que as variaveis estao entrando, 
+	depois os valoresboolean eh 1 e 0, strings é com ' 'where é o filtro de quando vc quer mostrar os dados.
+
+O % eh um coringa dentro do contexto do like, tem a parte exata, e que pode ser qualquer coisa.
+
+Se vc nao tiver saco de escrever varchar(255), aparentemente, só text resolve.
+
+
+Aula 2 (notas tbm no vaio)
+
+UPDATE compras SET observacoes = 'preparando o natal WHERE date = 101220;
+    ps: data, nesse caso, nao pode entrar como 2010-12-20, os hifens nao funcionam.
+    ps2: com hifens funciona sim, só que precisa das aspas em volta dai: '2010-12-20'
+
+UPDATE compras SET observacao = 'entregue antes de 2011' , recebido = true where data between 090701 and 100701;
+
+DELETE FROM compras WHERE data BETWEEN 090305 AND 090320;
+
+SELECT * FROM compras WHERE valor <> 98;
+    ou
+SELECT * FROM compras WHERE NOT valor = 98;
+
+DESCRIBE compras;
+    ou
+DESC compras;
+
+
+
+Aula 3:
+
+SELECT * FROM compras WHERE observacoes IS NULL;
+
+    imagina que vc quer impedir uma observação de ser null:
+    ao criar:
+CREATE TABLE pessoas (nome varchar(255) NOT NULL, ... );
+    ao modificar:
+ALTER TABLE compras MODIFY observacoes VARCHAR(255) NOT NULL;
+
+ALTER TABLE compras MODIFY recebido TINYINT(1) DEFAULT  '0';
+
+    imagine que vc quer predefinir valores validos para input:
+ALTER TABLE compras ADD COLUMN forma_pag ENUM('cartao', 'boleto', 'dinheiro');
+    perceba que se vc ja tinha dados, eles ficam NULL
+
+
+
+CREATE TABLE compras (id int auto_increment primary key, valor double, data date, recebido boolean default 1,  
+			observacoes varchar(255) not null, forma_pagt enum ('dinheiro', 'cartao', 'boleto');
