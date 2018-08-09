@@ -32,7 +32,7 @@ O % eh um coringa dentro do contexto do like, tem a parte exata, e que pode ser 
 Se vc nao tiver saco de escrever varchar(255), aparentemente, só text resolve.
 
 
-Aula 2 (notas tbm no vaio)
+Aula 2 (notas do dell)
 
 UPDATE compras SET observacoes = 'preparando o natal WHERE date = 101220;
     ps: data, nesse caso, nao pode entrar como 2010-12-20, os hifens nao funcionam.
@@ -50,6 +50,22 @@ DESCRIBE compras;
     ou
 DESC compras;
 
+
+Aula 2 (notas do vaio):
+Pra Entrar:
+sudo mysql -u root -p
+e ai entra, sem senha
+
+
+Info aula 2 mysql (passar pro git depois)(criar o git depois)
+
+comandos:
+
+select ATRIBUTO from TABLE where CONDICAO;
+select valor from COMPRAS where valor between 200 and 700;
+
+update TABLE set ATRIBUTO = ALGO where CONDICAO; (id = x, normalmente)
+update TABLE set ATRIBUTO = ALGO; (vai mudar pra todas as linhas da tabela)
 
 
 Aula 3:
